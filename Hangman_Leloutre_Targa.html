@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hangman</title>
+    <meta charset="utf-8"/>
+    <meta name="autor" content="Silvia Targa and Camilla Leloutre"/>
+    <meta name="description" content="Hangman by Silvia Targa and Camilla Leloutre" />
+    <!--our logo-->
+    <link rel="icon" type="image/x-icon" href="images/LogoCS.png">
+    <!--CSS link-->
+    <link rel="stylesheet" type="text/css" href="hangman.css">
+    <!--JS link-->
+    <script src="hangman.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>The Hangman Game</h1>
+    </header>
+    <section>
+      <article class="rules">
+        <h2>
+          Rules
+        </h2>
+        <!--General rules and introduction to our project-->
+        <p>
+          Hello we are <i>Camille and Silvia</i> and we present you our hangman game. <br/>
+          There are three difficulty levels, in each you have six lives and a different timer.<br/>
+          A player or a team try to guess what it is one letter at a time. The server draws a number of dashes equivalent to the number of letters in the word. <br/>
+          If a guessing player suggests a letter that occurs in the word, the server fills in the blanks with that letter in the right places. If the word does not contain the suggested letter, the server draws one element of a hangman’s gallows.<br/>
+          As the game progresses, a segment of the gallows and of a victim is added for every suggested letter not in the word. The number of incorrect guesses before the game ends is six. If you complete the word before the timeout and before losing the six lives you win.
+        </p>
+        <p>
+          To start you have to decide the level, press the bottom and guess the letters. When you win or you lose you can restart pressing the bottom again. <br/>
+          If you find the same word you can repress the bottom to change it.
+        </p>
+        <!--Objective and theme of our game-->
+        <p>
+          Objective: <strong>Guess the word/words before your man gets hung!</strong><br/>
+        </p>
+        <p>Theme: <strong>Computer Science/Programming languages</strong></p>
+        <p>
+        <!--Specification for each level-->
+          Levels:
+          <ul class="list">
+            <li>
+              <strong>Easy</strong>: in this level you have to find <strong>short word in 4 minutes</strong>.
+            </li>
+            <li>
+              <strong>Medium</strong>: here you have to find <strong>medium word in 3 minutes</strong>.
+            </li>
+            <li>
+              <strong>Hard</strong>: the most difficult level, you have to find <strong>long word in only 2 minutes</strong>.
+            </li>
+          </ul>
+        </p>
+      </article>
+      <!--Three differents difficulty level linked with JS-->
+      <table>
+        <tr>
+          <th colspan="3">Start new game</th>
+        </tr>
+        <tr>
+          <td>
+            <button class="difficulty-selector-button" onclick="startEasy()">Easy</button>
+          </td>
+          <td>
+            <button class="difficulty-selector-button" onclick="startMedium()">Medium</button>
+          </td>
+          <td>
+            <button class="difficulty-selector-button" onclick="startHard()">Hard</button>
+          </td>
+        </tr>
+      </table>
+
+      <canvas id="hangman-canvas" width="400" height="220"></canvas>
+      <!--As said in JS write the numer of lives and insert here the timer-->
+      <p> Lives left: <b id="lives">6</b></p>
+      <p> Time left: <b id="timer"></b> </p>
+
+      <table id="game-board">
+        <tr id="letters">
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <td>
+            <button disabled class="game-button" id="guess-button-a" onclick="guessLetter('a');">a</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-b" onclick="guessLetter('b');">b</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-c" onclick="guessLetter('c');">c</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-d" onclick="guessLetter('d');">d</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-e" onclick="guessLetter('e');">e</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-f" onclick="guessLetter('f');">f</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-g" onclick="guessLetter('g');">g</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-h" onclick="guessLetter('h');">h</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-i" onclick="guessLetter('i');">i</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-j" onclick="guessLetter('j');">j</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-k" onclick="guessLetter('k');">k</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-l" onclick="guessLetter('l');">l</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-m" onclick="guessLetter('m');">m</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button disabled class="game-button" id="guess-button-n" onclick="guessLetter('n');">n</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-o" onclick="guessLetter('o');">o</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-p" onclick="guessLetter('p');">p</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-q" onclick="guessLetter('q');">q</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-r" onclick="guessLetter('r');">r</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-s" onclick="guessLetter('s');">s</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-t" onclick="guessLetter('t');">t</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-u" onclick="guessLetter('u');">u</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-v" onclick="guessLetter('v');">v</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-w" onclick="guessLetter('w');">w</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-x" onclick="guessLetter('x');">x</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-y" onclick="guessLetter('y');">y</button>
+          </td>
+          <td>
+            <button disabled class="game-button" id="guess-button-z" onclick="guessLetter('z');">z</button>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </body>
+</html>
